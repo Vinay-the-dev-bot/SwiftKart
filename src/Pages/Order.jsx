@@ -9,7 +9,7 @@ function Order() {
   const state = useSelector((state) => state);
   const [payment, setPayment] = useState(false);
   const [street, setStreet] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(true);
   const toast = useToast();
   const [city, setCity] = useState("");
   const [addressState, setAddressState] = useState("");

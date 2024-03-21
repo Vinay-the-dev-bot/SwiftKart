@@ -82,7 +82,6 @@ const reducer = (state = initialState, action) => {
         )
         .filter((item) => item.count != 0);
 
-      console.log(updatedCartDecrease);
       return { ...state, cart: updatedCartDecrease };
     case "INCREASE_COUNT":
       const updatedCartIncrease = state.cart.map((item) =>

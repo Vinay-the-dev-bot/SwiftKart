@@ -36,13 +36,13 @@ export default function ProductCard({ product }) {
         }
       >
         <Box className="w-3/5 flex flex-col gap-2 ">
-          <Text>
+          {/* <Text>
             <Text as="span">Product Name :</Text>
             {product.title}
           </Text>
           <Text>
             <Text as="span">Product Price :</Text>
-            {product.price} Inr
+            {product.price} ₹
           </Text>
           <Text>
             <Text as="span">Description :</Text> {product.description}
@@ -54,27 +54,69 @@ export default function ProductCard({ product }) {
           <Text className="font-bold">Ratings</Text>
           <Text>
             {product.rating.rate} Stars | {product.rating.count} Ratings
+          </Text> */}
+          <Text fontSize="lg" fontWeight="bold" mb={4}>
+            Product Details
           </Text>
-          {/* {cart[0] && cart[0].id == product.id && cart[0].count > 0 ? (
-            <Box className="flex items-center gap-5 ">
-              <Button onClick={handleDecrement}>-</Button>
-              <Text>{ count}</Text>
-              <Button onClick={handleIncrement}>+</Button>
+
+          <Text fontSize="md">
+            <Text as="span" fontWeight="bold">
+              Product Name:
+            </Text>{" "}
+            {product.title}
+          </Text>
+
+          <Text fontSize="md">
+            <Text as="span" fontWeight="bold">
+              Product Price:
+            </Text>{" "}
+            {product.price} ₹
+          </Text>
+
+          <Text fontSize="md">
+            <Text as="span" fontWeight="bold">
+              Description:
+            </Text>{" "}
+            {product.description}
+          </Text>
+
+          <Text fontSize="md">
+            <Text as="span" fontWeight="bold">
+              Category:
+            </Text>{" "}
+            {product.category}
+          </Text>
+
+          <Box className="flex items-center justify-between">
+            <Box className="flex items-center justify-between">
+              <Text fontSize="md" fontWeight="bold">
+                Ratings :
+              </Text>
+              <Text fontSize="md">
+                {` ${product.rating.rate}`} Stars | {product.rating.count}{" "}
+                Ratings
+              </Text>
             </Box>
-          ) : (
-            <Button onClick={handleAddToCart}>Add To Cart</Button>
-          )} */}
-          {count > 0 ? (
-            <Box className="flex items-center gap-5 ">
-              <Button onClick={handleDecrement}>-</Button>
-              <Text>{count}</Text>
-              <Button onClick={handleIncrement}>+</Button>
-            </Box>
-          ) : (
-            <Button width={"fit-content"} onClick={handleAddToCart}>
-              Add To Cart
-            </Button>
-          )}
+            {count > 0 ? (
+              <Box className="flex items-center gap-5 ">
+                <Button colorScheme="red" onClick={handleDecrement}>
+                  -
+                </Button>
+                <Button colorScheme="orange">{count}</Button>
+                <Button colorScheme="green" onClick={handleIncrement}>
+                  +
+                </Button>
+              </Box>
+            ) : (
+              <Button
+                width={"fit-content"}
+                colorScheme="green"
+                onClick={handleAddToCart}
+              >
+                Add To Cart
+              </Button>
+            )}
+          </Box>
         </Box>
         <Img
           width={"15%"}

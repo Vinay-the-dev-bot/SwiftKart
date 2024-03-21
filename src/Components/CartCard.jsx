@@ -27,19 +27,32 @@ export default function CartCard({ product }) {
             {product.title}
           </Text>
           <Text>
-            <Text as="span">Product Price :</Text>
-            {product.price} Inr
+            <Text as="span">Product Price : </Text>
+            {product.price} ₹
           </Text>
 
-          <Box className="w-3/5 flex justify-between">
+          <Box className="w-3/5 flex justify-between ">
             {count > 0 && (
-              <Box className="flex items-center gap-5 ">
-                <Button onClick={() => dispatch(decrement(product))}>-</Button>
-                <Text>{count}</Text>
-                <Button onClick={() => dispatch(increment(product))}>+</Button>
+              <Box className="flex items-center gap-5  ">
+                <Button
+                  colorScheme="red"
+                  onClick={() => dispatch(decrement(product))}
+                >
+                  -
+                </Button>
+                <Button colorScheme="orange">{count}</Button>
+                <Button
+                  colorScheme="green"
+                  onClick={() => dispatch(increment(product))}
+                >
+                  +
+                </Button>
               </Box>
             )}
-            <Button onClick={() => dispatch(removeFromCart(product))}>
+            <Button
+              colorScheme="red"
+              onClick={() => dispatch(removeFromCart(product))}
+            >
               Remove From Cart
             </Button>
           </Box>
@@ -48,7 +61,7 @@ export default function CartCard({ product }) {
           width={"15%"}
           height={"fit-content"}
           src={`${product.image}`}
-          alt={`${product.title} asdas`}
+          alt={`${product.title}  `}
         />
       </Box>
     </>
