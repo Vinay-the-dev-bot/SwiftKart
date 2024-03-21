@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../Components/CartCard";
 import { useEffect, useState } from "react";
 import { orderPrice } from "../Store/actions";
+import { useNavigate } from "react-router";
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
   const state = useSelector((state) => state);
+  const navigate = useNavigate();
   const [totalAmount, setTotalAmount] = useState(0);
   let dispatch = useDispatch();
   useEffect(() => {
@@ -38,12 +40,27 @@ function Cart() {
             <Text>Add Items to Cart</Text>
           )}
 
-          <Button
-            onClick={() => dispatch(orderPrice(totalAmount))}
-            width={"fit-content"}
-          >
-            Order Items
-          </Button>
+          {state.isLoggedIn ? (
+            totalAmount == 0 ? (
+              <Button onClick={() => navigate("/")} width={"fit-content"}>
+                Add Items
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  navigate("/order");
+                  dispatch(orderPrice(totalAmount));
+                }}
+                width={"fit-content"}
+              >
+                Order Items
+              </Button>
+            )
+          ) : (
+            <Button onClick={() => navigate("/login")} width={"fit-content"}>
+              Please Login to order
+            </Button>
+          )}
         </Box>
       </>
     </>
