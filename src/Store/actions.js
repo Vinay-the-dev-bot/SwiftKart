@@ -4,6 +4,12 @@ export const addToCart = (product) => {
 export const removeFromCart = (product) => {
   return { type: "REMOVE_FROM_CART", payload: product };
 };
+export const setLoginStatus = (status, name) => {
+  return { type: "LOGIN", payload: { status, name } };
+};
+export const setOrders = () => {
+  return { type: "LOGIN", payload: true };
+};
 export const increment = (product) => {
   return { type: "INCREASE_COUNT", payload: product };
 };

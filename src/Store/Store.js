@@ -1,8 +1,10 @@
-import { applyMiddleware, createStore } from "redux";
-
+import { createStore } from "redux";
+export const url = "https://codeflow-174q.onrender.com";
 const initialState = {
   cart: [],
   orderPrice: 0,
+  isLoggedIn: false,
+  name: "",
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -28,6 +30,14 @@ const reducer = (state = initialState, action) => {
         (item) => item.id !== action.payload.id
       );
       return { ...state, cart: updatedCart };
+    case "LOGIN":
+      return {
+        ...state,
+        isLoggedIn: action.payload.status,
+        name: action.payload.name,
+      };
+    // case "USER_NAME":
+    //   return { ...state, name: action.payload };
     case "DECREASE_COUNT":
       const updatedCartDecrease = state.cart.map((item) =>
         item.id === action.payload.id && item.count > 0
