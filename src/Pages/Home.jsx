@@ -4,15 +4,18 @@ import { useEffect, useState } from "react";
 import ProductCard from "../Components/ProductCard";
 import LoadingToast from "../Components/LoadingToast";
 import { useSelector } from "react-redux";
+import { url } from "../Store/Store";
+import { useNavigate } from "react-router";
 
 function Home() {
   const [products, setProducts] = useState([]);
   const state = useSelector((state) => state);
+  const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
   let fetchData = async () => {
-    let res = await fetch("https://fakestoreapi.com/products");
+    console.log(url);
+    let res = await fetch(`${url}/products`);
     let data = await res.json();
-    console.log(data);
     setProducts(data);
     setisLoading(false);
   };
@@ -35,11 +38,17 @@ function Home() {
           <ProductCard key={product.id} product={product} />
         ))}
       </Box>
-      <Box position="fixed" bottom="2rem" right="2rem" zIndex="1000">
-        <Button colorScheme="blue" size="lg">
-          Go to Cart ({count})
-        </Button>
-      </Box>
+      {count && (
+        <Box position="fixed" bottom="2rem" right="2rem" zIndex="1000">
+          <Button
+            onClick={() => navigate("/cart")}
+            colorScheme="blue"
+            size="lg"
+          >
+            Go to Cart ({count})
+          </Button>
+        </Box>
+      )}
     </>
   );
 }

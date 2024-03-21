@@ -9,7 +9,7 @@ function Order() {
   const state = useSelector((state) => state);
   const [payment, setPayment] = useState(false);
   const [street, setStreet] = useState("");
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const toast = useToast();
   const [city, setCity] = useState("");
   const [addressState, setAddressState] = useState("");
@@ -38,17 +38,24 @@ function Order() {
             {/* <Text>Items Ordering</Text> */}
             <Box>
               {state.cart.map((item) => (
-                <Box className="w-3/5 p-2 m-auto flex">
+                <Box
+                  boxShadow={
+                    " rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"
+                  }
+                  className="w-3/5 px-10 p-5 m-auto rounded flex"
+                >
                   <Box className="w-3/5">{item.title} </Box>
-                  <Box className="w-1/5">{item.count} </Box>
-                  <Box className="w-1/5">{item.count * item.price} </Box>
+                  <Box className="w-1/5">
+                    <Text as={"span"}>Quantity : </Text>
+                    {item.count}
+                  </Box>
+                  <Box className="w-1/5">
+                    Price : {item.count * item.price} ₹
+                  </Box>
                 </Box>
               ))}
-              <Box className="w-3/5 p-2 m-auto flex">
-                <Box className="w-4/5 text-right px-10 ">
-                  Total Order Amount :{" "}
-                </Box>
-                <Box className="w-1/5">{state.orderPrice} </Box>
+              <Box className="w-3/5 text-center p-2 m-auto flex">
+                Total Order Amount :{state.orderPrice}
               </Box>
             </Box>
           </Box>

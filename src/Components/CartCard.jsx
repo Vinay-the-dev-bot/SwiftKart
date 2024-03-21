@@ -31,7 +31,7 @@ export default function CartCard({ product }) {
             {product.price} ₹
           </Text>
 
-          <Box className="w-3/5 flex justify-between ">
+          <Box className="  flex justify-around ">
             {count > 0 && (
               <Box className="flex items-center gap-5  ">
                 <Button
