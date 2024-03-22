@@ -33,7 +33,10 @@ function Cart() {
               );
             })
           ) : (
-            <Text>Add Items to Cart</Text>
+            <Box className="flex flex-col text-center py-5 gap-5">
+              <Text>It seems like your cart is as empty as a desert.</Text>
+              <Text>Time to fill it up with treasures!</Text>
+            </Box>
           )}
 
           <Box className="w-3/5 p-5 m-auto flex justify-around ">

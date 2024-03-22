@@ -9,9 +9,12 @@ import {
   Box,
   useToast,
 } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../Store/actions";
 
 const Payment = ({ setSuccess }) => {
   const toast = useToast();
+  const dispatch = useDispatch();
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpDate] = useState("");
   const [cvv, setCVV] = useState("");
@@ -54,6 +57,7 @@ const Payment = ({ setSuccess }) => {
   const handleOtpSubmit = (e) => {
     e.preventDefault();
     if (otp == "1863") {
+      dispatch(clearCart());
       toast({
         description: "Payment SuccessFull",
         status: "success",

@@ -36,6 +36,8 @@ const reducer = (state = initialState, action) => {
         (item) => item.id !== action.payload.id
       );
       return { ...state, cart: updatedCart };
+    case "CLEAR_CART":
+      return { ...state, cart: [] };
     case "LOGIN":
       return {
         ...state,

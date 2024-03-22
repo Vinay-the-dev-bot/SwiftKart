@@ -4,6 +4,10 @@ export const addToCart = (product) => {
 export const removeFromCart = (product) => {
   return { type: "REMOVE_FROM_CART", payload: product };
 };
+
+export const clearCart = () => {
+  return { type: "CLEAR_CART" };
+};
 export const setLoginStatus = (status, name) => {
   return { type: "LOGIN", payload: { status, name } };
 };
@@ -19,4 +23,3 @@ export const decrement = (product) => {
 export const orderPrice = (totalPrice) => {
   return { type: "ORDER_PRICE", payload: totalPrice };
 };
-// module.exports = { addToCart, removeFromCart };

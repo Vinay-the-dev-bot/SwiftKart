@@ -27,7 +27,6 @@ export default function ProductCard({ product }) {
 
   return (
     <>
-      {/* <p>{JSON.stringify(cart)}</p> */}
       <Box
         className=" w-4/5 m-auto flex items-center justify-around p-5  rounded-lg "
         key={product.id}
@@ -36,25 +35,6 @@ export default function ProductCard({ product }) {
         }
       >
         <Box className="w-3/5 flex flex-col gap-2 ">
-          {/* <Text>
-            <Text as="span">Product Name :</Text>
-            {product.title}
-          </Text>
-          <Text>
-            <Text as="span">Product Price :</Text>
-            {product.price} ₹
-          </Text>
-          <Text>
-            <Text as="span">Description :</Text> {product.description}
-          </Text>
-          <Text>
-            <Text as="span">Category :</Text>
-            {product.category}
-          </Text>
-          <Text className="font-bold">Ratings</Text>
-          <Text>
-            {product.rating.rate} Stars | {product.rating.count} Ratings
-          </Text> */}
           <Text fontSize="lg" fontWeight="bold" mb={4}>
             Product Details
           </Text>
@@ -121,7 +101,6 @@ export default function ProductCard({ product }) {
         <Img
           width={"15%"}
           height={"fit-content"}
-          // bg={"transparent"}
           src={`${product.image}`}
           alt={`${product.title} asdas`}
         />

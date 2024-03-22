@@ -32,33 +32,29 @@ function Order() {
       {success ? (
         <OrderSuccess />
       ) : (
-        <Box className="flex flex-col gap-5">
-          {/* <Box>Total Order Amount{state.orderPrice}</Box> */}
-          <Box>
-            {/* <Text>Items Ordering</Text> */}
-            <Box>
-              {state.cart.map((item) => (
-                <Box
-                  boxShadow={
-                    " rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"
-                  }
-                  className="w-3/5 px-10 p-5 m-auto rounded flex"
-                >
-                  <Box className="w-3/5">{item.title} </Box>
-                  <Box className="w-1/5">
-                    <Text as={"span"}>Quantity : </Text>
-                    {item.count}
-                  </Box>
-                  <Box className="w-1/5">
-                    Price : {item.count * item.price} ₹
-                  </Box>
-                </Box>
-              ))}
-              <Box className="w-3/5 text-center p-2 m-auto flex">
-                Total Order Amount :{state.orderPrice}
+        <Box className="flex   gap-2 flex-col ">
+          {/* <Text>Items Ordering</Text> */}
+
+          {state.cart.map((item) => (
+            <Box
+              border={"1px solid black"}
+              // boxShadow={
+              //   " rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"
+              // }
+              className="w-3/5 px-10 py-2 m-auto rounded flex"
+            >
+              <Box className="w-1/3">{item.title} </Box>
+              <Box className="w-1/3">
+                <Text as={"span"}>Quantity : </Text>
+                {item.count}
               </Box>
+              <Box className="w-1/3">Price : {item.count * item.price} ₹</Box>
             </Box>
+          ))}
+          <Box className="w-3/5 text-right px-16 m-auto ">
+            Total Order Amount :{state.orderPrice}
           </Box>
+
           <Box width={"50%"} margin={"auto"}>
             <form onSubmit={handleAddressDetails}>
               <VStack spacing={4} align="stretch">
