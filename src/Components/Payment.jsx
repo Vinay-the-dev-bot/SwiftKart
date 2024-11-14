@@ -18,11 +18,19 @@ const Payment = ({ setSuccess }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpDate] = useState("");
   const [cvv, setCVV] = useState("");
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(["", "", "", ""]);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleOtpChange = (e) => {
-    setOtp(e.target.value);
+  const handleOtpChange = (e, index) => {
+    const value = e.target.value;
+    if (/[^0-9]/.test(value)) return; 
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+    if (index < 3 && value) {
+      document.getElementById(`otp-input-${index + 1}`).focus();
+    }
   };
 
   const handlePaymentSubmit = (e) => {
@@ -56,7 +64,7 @@ const Payment = ({ setSuccess }) => {
   };
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-    if (otp == "1863") {
+    if (otp.join("") == "1863") {
       dispatch(clearCart());
       toast({
         description: "Payment SuccessFull",
@@ -110,17 +118,31 @@ const Payment = ({ setSuccess }) => {
             </Button>
           </VStack>
         </form>
-        <Box>
+        <Box style={{ width: "40%" }}>
           {submitted && (
             <form onSubmit={handleOtpSubmit}>
               <VStack spacing={4} align="stretch">
                 <Text fontSize="xl">Enter OTP</Text>
-                <FormControl id="otp">
-                  <Input
-                    type="password"
-                    value={otp}
-                    onChange={handleOtpChange}
-                  />
+                <FormControl
+                  id="otp"
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                  }}
+                >
+                  {otp.map((digit, index) => (
+                    <Input
+                      key={index}
+                      id={`otp-input-${index}`}
+                      type="text"
+                      maxLength="1"
+                      value={digit}
+                      onChange={(e) => handleOtpChange(e, index)}
+                      autoFocus={index === 0}
+                      textAlign="center"
+                      borderColor="gray.300"
+                    />
+                  ))}
                 </FormControl>
                 <Button type="submit" colorScheme="green">
                   Verify OTP

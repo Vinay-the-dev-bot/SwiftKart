@@ -2,9 +2,6 @@ import { Box, Img, Text, Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, increment, decrement } from "../Store/actions";
-// const { addToCart, removeFromCart } = require("../Store/actions");
-// import { addToCart, removeFromCart } from "../Store/actions";
-// const { addToCart } = require("../Store/actions");
 
 export default function ProductCard({ product }) {
   const cart = useSelector((state) => state.cart);

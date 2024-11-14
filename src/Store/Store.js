@@ -1,10 +1,15 @@
 import { createStore } from "redux";
-// export const url = "https://codeflow-174q.onrender.com";
 export const url = "http://localhost:4500";
 const name = localStorage.getItem("name");
 const token = localStorage.getItem("token");
 const smt = 15000;
-console.log("NAME", name);
+export const passwordConditions = {
+  lower: "Password must contain at least one lowercase letter.",
+  upper: "Password must contain at least one uppercase letter.",
+  digit: "Password must contain at least one digit.",
+  special: "Password must contain at least one special character.",
+  length: "Password must be minimum 8 characters length.",
+};
 const initialState = {
   cart: [],
   orderPrice: smt || 0,
@@ -44,8 +49,6 @@ const reducer = (state = initialState, action) => {
         isLoggedIn: action.payload.status,
         name: action.payload.name,
       };
-    // case "USER_NAME":
-    //   return { ...state, name: action.payload };
     case "DECREASE_COUNT":
       const updatedCartDecrease = state.cart
         .map((item) =>
@@ -67,22 +70,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, orderPrice: action.payload };
     default:
       return state;
-
-    // case "ADD_TO_CART":
-    //   return { ...state, cart: [...state.cart, action.payload] };
-    // case "REMOVE_FROM_CART":
-    //   state.cart.filter((item) => {
-    //     return item.id !== action.payload.id;
-    //   });
-    //   return { ...state, questions: action.payload };
-    // case "Correct":
-    //   return { ...state, score: state.score + action.payload };
-    // default:
-    //   return state;
   }
 };
 export const store = createStore(reducer);
-// const store = legacy_createStore(reducer, applyMiddleware(thunk));
-// legacy_createStore
 
 export default store;

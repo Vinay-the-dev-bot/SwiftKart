@@ -15,14 +15,14 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { url } from "../Store/Store.js";
-
+import { passwordConditions, url } from "../Store/Store.js";
 const Signup = () => {
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [passwordMatching, setPasswordMatching] = useState([]);
   const navigate = useNavigate();
 
   const handleUsername = (e) => {
@@ -33,19 +33,43 @@ const Signup = () => {
     setEmail(e.target.value);
   };
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
+  const handlePassword = (password) => {
+    var passwordMatch = [];
+    const hasLowerCase = /[a-z]/;
+    const hasUpperCase = /[A-Z]/;
+    const hasDigit = /\d/;
+    const hasSpecialChar = /[!@#$%^&*()_+{}:;,.?/~\\|`=<>]/;
+    const isValidLength = password.length >= 8;
+
+    if (!hasLowerCase.test(password)) {
+      passwordMatch.push("lower");
+    }
+    if (!hasUpperCase.test(password)) {
+      passwordMatch.push("upper");
+    }
+    if (!hasDigit.test(password)) {
+      passwordMatch.push("digit");
+    }
+    if (!hasSpecialChar.test(password)) {
+      passwordMatch.push("special");
+    }
+    if (!isValidLength) {
+      passwordMatch.push("length");
+    }
+    setPasswordMatching([...passwordMatch]);
+    setPassword(password);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (passwordMatching.length > 0) return;
 
     try {
       console.log(`${url}/users/register`);
       const response = await axios.post(`${url}/users/register`, {
         name,
         email,
-        pass,
+        password: pass,
       });
       console.log(response);
       if (response.data.msg == "Already Registered") {
@@ -82,7 +106,7 @@ const Signup = () => {
     >
       <Box
         p={8}
-        width={{ base: "90%", sm: "80%", md: "60%", lg: "40%" }}
+        width={{ base: "90%", sm: "80%", md: "65%", lg: "45%" }}
         borderWidth={1}
         borderRadius={8}
         boxShadow="lg"
@@ -122,11 +146,35 @@ const Signup = () => {
               placeholder="Enter your password"
               value={pass}
               backgroundColor="white"
-              onChange={handlePassword}
+              onChange={(e) => handlePassword(e.target.value)}
             />
           </FormControl>
+          {passwordMatching && passwordMatching.length > 0 && (
+            <ol
+              style={{
+                backgroundColor: "rgb(242 153 156)",
+                border: "1px solid #F2003C",
+                padding: "5px",
+                borderRadius: "5px",
+                marginBottom: "20px",
+              }}
+            >
+              {passwordMatching.map((pass, index) => {
+                return (
+                  <li>
+                    {index + 1}. {passwordConditions[pass]}
+                  </li>
+                );
+              })}
+            </ol>
+          )}
 
-          <Button type="submit" width="full" backgroundColor="#92C7CF">
+          <Button
+            type="submit"
+            disabled={passwordMatching.length > 0}
+            width="full"
+            backgroundColor="#92C7CF"
+          >
             Sign Up
           </Button>
         </form>

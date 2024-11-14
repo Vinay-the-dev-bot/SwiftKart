@@ -38,9 +38,6 @@ function Order() {
           {state.cart.map((item) => (
             <Box
               border={"1px solid black"}
-              // boxShadow={
-              //   " rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"
-              // }
               className="w-3/5 px-10 py-2 m-auto rounded flex"
             >
               <Box className="w-1/3">{item.title} </Box>
